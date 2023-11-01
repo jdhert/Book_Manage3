@@ -269,11 +269,12 @@ public class BM3 extends BookManager{
     public void printBookInName(){
         System.out.println("도서 제목 입력: ");
         String bookName = sc.nextLine();
+        bookName = bookName.toLowerCase();
         boolean check = true;
         System.out.println("■■■■■■■■ 도서 제목으로 조회 ■■■■■■■■");
         for (Book b : bookList){
-            System.out.println(b.getName().compareTo(bookName));
-            if(b.getName().compareTo(bookName) == 0){
+            String bookNameLower = b.getName().toLowerCase();
+            if(bookNameLower.contains(bookName)){
                 System.out.print("[");
                 System.out.print(b.getId());
                 System.out.print(", ");
@@ -314,7 +315,7 @@ public class BM3 extends BookManager{
         System.out.println("■■■■■■■■ 도서 출간일로 조회 ■■■■■■■■");
         boolean check = true;
         for (Book b : bookList){
-            if(b.getPublishedDate().compareTo(bookTime1) >= 0 && b.getPublishedDate().compareTo(bookTime2) <= 0 ){
+            if(b.getPublishedDate().compareTo(bookTime1) >= 0 && b.getPublishedDate().compareTo(bookTime2) <= 0){
                 System.out.print("[");
                 System.out.print(b.getId());
                 System.out.print(", ");
