@@ -26,10 +26,12 @@ public class BM3 extends BookManager{
             System.out.println("(4) 도서 삭제");
             System.out.println("(5) 도서 이름으로 검색");
             System.out.println("(6) 도서 출판일로 검색");
+            System.out.println("(7) 도서 제목 사전순 정렬");
+            System.out.println("(8) 도서 출판일 순으로 정렬");
             System.out.println("(q) 프로그램 종료");
             System.out.print("선택 >> ");
             String userInput = sc.nextLine();
-            switch (userInput) {
+            switch (userInput.toLowerCase()) {
                 case "1":
                     // 조회
                     printAllBook();
@@ -55,6 +57,12 @@ public class BM3 extends BookManager{
                     break;
                 case "6":
                     printBookInTime();
+                    break;
+                case "7":
+                    dictionaryPrint();
+                    break;
+                case"8":
+                    dateByPrint();
                     break;
                 default:
                     System.out.println("보기에 나와있는 것을 입력하세요!!! :( ");
@@ -237,7 +245,7 @@ public class BM3 extends BookManager{
             int value = Integer.parseInt(input);
             return value;
         } catch (Exception e) {
-            System.out.println("잘못된 값을 입력하셨습니다. 다시 입력하세요 ㅠㅠ");
+            System.out.println("잘못된 값을 입력하셨습니다. 숫자로 다시 입력하세요 ㅠㅠ");
             return getInt(prompt);
         }
     }
@@ -249,7 +257,7 @@ public class BM3 extends BookManager{
             LocalDate Date = LocalDate.parse(publishDate);
             return Date;
         } catch (Exception e){
-            System.out.println("잘못된 값을 입력하셨습니다. 다시 입력하세요 ㅠㅠ");
+            System.out.println("잘못된 값을 입력하셨습니다. 날짜로 다시 입력하세요 ㅠㅠ");
             return  getDate(prompt);
         }
     }
@@ -261,20 +269,17 @@ public class BM3 extends BookManager{
             long value = Long.parseLong(input);
             return value;
         } catch (Exception e) {
-            System.out.println("잘못된 값을 입력하셨습니다. 다시 입력하세요 ㅠㅠ");
+            System.out.println("잘못된 값을 입력하셨습니다. 숫자를 다시 입력하세요 ㅠㅠ");
             return getLong(prompt); // 재귀 호출
         }
     }
-
     public void printBookInName(){
         System.out.println("도서 제목 입력: ");
-        String bookName = sc.nextLine();
-        bookName = bookName.toLowerCase();
+        String bookName = (sc.nextLine()).toLowerCase();
         boolean check = true;
         System.out.println("■■■■■■■■ 도서 제목으로 조회 ■■■■■■■■");
         for (Book b : bookList){
-            String bookNameLower = b.getName().toLowerCase();
-            if(bookNameLower.contains(bookName)){
+            if(b.getName().toLowerCase().contains(bookName)){
                 System.out.print("[");
                 System.out.print(b.getId());
                 System.out.print(", ");
@@ -304,11 +309,9 @@ public class BM3 extends BookManager{
                     check = false;
                 }
             }
-        } if(check){
+        } if(check)
             System.out.println("해당 도서는 존재하지 않습니다. ");
-        }
     }
-
     public void printBookInTime(){
         LocalDate bookTime1 = getDate("출간일 시작범위 입력 ");
         LocalDate bookTime2 = getDate("출간일 종료범위 입력 ");
@@ -331,7 +334,6 @@ public class BM3 extends BookManager{
                     System.out.print(((EBook) b).getFileSize());
                     System.out.println("]");
                     check = false;
-
                 } else if (b instanceof AudioBook) {
                     System.out.print(", ");
                     System.out.print(((AudioBook) b).getFileSize());
@@ -347,8 +349,111 @@ public class BM3 extends BookManager{
                     check = false;
                 }
             }
-        } if(check){
+        } if(check)
             System.out.println("해당 도서는 존재하지 않습니다. ");
+    }
+    public void dictionaryPrint(){
+        System.out.println("■■■■■■■■ 도서 사전순으로 정렬 ■■■■■■■■");
+        quickSort(bookList, 0, bookList.size()-1, true);
+        for (Book book : bookList) {
+            System.out.print("[");
+            System.out.print(book.getId());
+            System.out.print(", ");
+            System.out.print(book.getName());
+            System.out.print(", ");
+            System.out.print(book.getAuthor());
+            System.out.print(", ");
+            System.out.print(book.getIsbn());
+            System.out.print(", ");
+            System.out.print(book.getPublishedDate());
+            if(book instanceof EBook) {
+                System.out.print(", ");
+                System.out.print(((EBook) book).getFileSize());
+                System.out.print("]");
+            } else if (book instanceof AudioBook) {
+                System.out.print(", ");
+                System.out.print(((AudioBook) book).getFileSize());
+                System.out.print(", ");
+                System.out.print(((AudioBook) book).getLanguage());
+                System.out.print(", ");
+                System.out.print(((AudioBook) book).getPlayTime());
+                System.out.print("]");
+            } else System.out.print("]");
+            System.out.println();
+        }
+    }
+
+    public void dateByPrint(){
+        System.out.println("■■■■■■■■ 도서 출판일 순으로 정렬 ■■■■■■■■");
+        quickSort(bookList, 0, bookList.size()-1, false);
+        for (Book book : bookList) {
+            System.out.print("[");
+            System.out.print(book.getId());
+            System.out.print(", ");
+            System.out.print(book.getName());
+            System.out.print(", ");
+            System.out.print(book.getAuthor());
+            System.out.print(", ");
+            System.out.print(book.getIsbn());
+            System.out.print(", ");
+            System.out.print(book.getPublishedDate());
+            if(book instanceof EBook) {
+                System.out.print(", ");
+                System.out.print(((EBook) book).getFileSize());
+                System.out.print("]");
+            } else if (book instanceof AudioBook) {
+                System.out.print(", ");
+                System.out.print(((AudioBook) book).getFileSize());
+                System.out.print(", ");
+                System.out.print(((AudioBook) book).getLanguage());
+                System.out.print(", ");
+                System.out.print(((AudioBook) book).getPlayTime());
+                System.out.print("]");
+            } else System.out.print("]");
+            System.out.println();
+        }
+    }
+    void quickSort(ArrayList<Book> bookList, int p, int r, boolean check){
+        if(p < r){
+            int q = partition(bookList,p,r, check);
+            quickSort(bookList, p, q-1, check);
+            quickSort(bookList, q+1, r, check);
+        }
+    }
+    int partition(ArrayList<Book> bookList, int p, int r, boolean check){
+        if (check) {
+            String x = bookList.get(r).getName();
+            int i = p - 1;
+            Book temp;
+            for (int j = p; j < r; j++) {
+//            System.out.println(bookList.get(j).getName().compareTo(x));
+                if (bookList.get(j).getName().compareToIgnoreCase(x) <= 0) {
+                    temp = bookList.get(++i);
+                    bookList.set(i, bookList.get(j));
+                    bookList.set(j, temp);
+                }
+            }
+            temp = bookList.get(i + 1);
+            bookList.set(i + 1, bookList.get(r));
+            bookList.set(r, temp);
+            return i + 1;
+        }
+        else {
+            LocalDate x = bookList.get(r).getPublishedDate();
+            int i = p - 1;
+            Book temp;
+            for (int j = p; j < r; j++) {
+//            System.out.println(bookList.get(j).getName().compareTo(x));
+                if (!bookList.get(j).getPublishedDate().isAfter(x)) {
+                    temp = bookList.get(++i);
+                    bookList.set(i, bookList.get(j));
+                    bookList.set(j, temp);
+                }
+            }
+            temp = bookList.get(i + 1);
+            bookList.set(i + 1, bookList.get(r));
+            bookList.set(r, temp);
+            return i + 1;
         }
     }
 
