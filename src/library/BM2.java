@@ -231,11 +231,7 @@ public class BM2 extends BookManager{
     public Book Check(long id) {
         for (Book b : bookList){
             if(b.getId().equals(id)){
-                if(b instanceof  EBook)
-                    return b;
-                else if (b instanceof  AudioBook) {
-                    return b;
-                } else return b;
+                return b;
             }
         } return null;
     }
