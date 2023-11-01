@@ -178,8 +178,7 @@ public class BM2 extends BookManager{
                 System.out.print("파일사이즈: ");
                 fileSize = sc.nextLine();
                 i=2;
-            }
-            if (check instanceof AudioBook) {
+            }else if (check instanceof AudioBook) {
                 System.out.print("파일사이즈: ");
                 fileSize = sc.nextLine();
                 System.out.print("언어: ");
