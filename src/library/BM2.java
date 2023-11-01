@@ -228,21 +228,20 @@ public class BM2 extends BookManager{
         System.out.println("■■■■■■■■■■■ 도서 삭제 ■■■■■■■■■■■");
         System.out.println("삭제하고자 하는 도서의 도서번호를 입력하세요.");
         System.out.print("선택 >> ");
-        if(Check(Long.parseLong(sc.nextLine())) != null) {
-            bookList.remove(index);
+        Book check = Check(Long.parseLong(sc.nextLine()));
+        if(check != null) {
+            bookList.remove(check);
             System.out.println("삭제가 완료되었습니다.");
         } else System.out.println("해당 도서가 존재하지 않습니다.");
     }
-    private static int index;
     public Book Check(long id){
-        for(int i=0; i<bookList.size(); i++) {
-            if (Objects.equals(bookList.get(i).getId(), id)) {
-                index = i;
-                if(bookList.get(i) instanceof EBook)
-                    return bookList.get(i);
-                else if (bookList.get(i) instanceof AudioBook) {
-                    return bookList.get(i);
-                } else return bookList.get(i);
+        for (Book b : bookList){
+            if(b.getId().equals(id)){
+                if(b instanceof  EBook)
+                    return b;
+                else if (b instanceof  AudioBook) {
+                    return b;
+                } else return b;
             }
         } return null;
     }
