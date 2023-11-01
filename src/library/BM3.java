@@ -102,12 +102,12 @@ public class BM3 extends BookManager{
     }
     public void addBook() {
         System.out.println("■■■■■■■■■■■ 도서 등록 ■■■■■■■■■■■");
-        int form = getInt("어떤 책을 등록하시겠습니까?(숫자입력) 1. Book 2. EBook 3. AudioBook");
+        int form = getInt("어떤 책을 등록하시겠습니까?(숫자입력) 1. Book 2. EBook 3. AudioBook >> ");
         if(form >= 4 || form <= 0) {
             System.out.println("잘못된 숫자 입력하였습니다!!! :( ");
             return;
         }
-        long id = getLong("(1) 도서번호를 입력해주세요.(유일한 번호) ");
+        long id = getLong("(1) 도서번호를 입력해주세요.(유일한 번호) >> ");
         if(Check(id) == null) {
             String file = "";
             String language = "";
@@ -116,15 +116,15 @@ public class BM3 extends BookManager{
             String name = sc.nextLine();
             System.out.print("(3) 저자명을 입력해주세요. >> ");
             String author = sc.nextLine();
-            long isbn = getLong("(4) isbn을 입력해주세요. ");
-            LocalDate Date = getDate("(5) 출간일을 입력해주세요.(YYYY-MM-DD형식) ");
+            long isbn = getLong("(4) isbn을 입력해주세요. >> ");
+            LocalDate Date = getDate("(5) 출간일을 입력해주세요.(YYYY-MM-DD형식) >> ");
             if(form >= 2) {
                 System.out.print("(6) 파일 사이즈를 입력해주세요. >> ");
                 file = sc.nextLine();
                 if(form >= 3) {
                     System.out.print("(7) 언어를 입력해주세요. >> ");
                     language = sc.nextLine();
-                    time = getInt("(8) 오디오북 길이를 입력해주세요.(숫자) ");
+                    time = getInt("(8) 오디오북 길이를 입력해주세요.(숫자) >> ");
                 }
             }
             switch (form) {
@@ -163,7 +163,7 @@ public class BM3 extends BookManager{
     @Override
     public void updateBook() {
         System.out.println("수정 메서드 실행");
-        long id = getLong("수정하고자 하는 도서번호를 입력하세요 ");
+        long id = getLong("수정하고자 하는 도서번호를 입력하세요 >> ");
         Book form = Check(id);
         int i=0;
         if (form != null) {
@@ -171,23 +171,23 @@ public class BM3 extends BookManager{
             String language = "";
             int time=0;
             System.out.println("[수정 정보를 입력해주세요]");
-            System.out.print("제목: ");
+            System.out.print("제목 >> ");
             String name = sc.nextLine();
-            System.out.print("저자: ");
+            System.out.print("저자 >> ");
             String author = sc.nextLine();
-            long isbn = getLong("isbn: ");
-            LocalDate Date = getDate("출판일(YYYY-MM-DD): ");
+            long isbn = getLong("isbn >> ");
+            LocalDate Date = getDate("출판일(YYYY-MM-DD) >> ");
             i++;
             if (form instanceof EBook) {
-                System.out.print("파일사이즈: ");
+                System.out.print("파일사이즈 >> ");
                 fileSize = sc.nextLine();
                 i=2;
             }else if (form instanceof AudioBook) {
-                System.out.print("파일사이즈: ");
+                System.out.print("파일사이즈 >> ");
                 fileSize = sc.nextLine();
-                System.out.print("언어: ");
+                System.out.print("언어 >> ");
                 language = sc.nextLine();
-                time = getInt("재생시간(숫자): ");
+                time = getInt("재생시간(숫자) >> ");
                 i=3;
             }
             switch (i) {
@@ -222,7 +222,7 @@ public class BM3 extends BookManager{
     }
     public void removeBook() {
         System.out.println("■■■■■■■■■■■ 도서 삭제 ■■■■■■■■■■■");
-        long id = getLong("삭제하고자 하는 도서의 도서번호를 입력하세요.");
+        long id = getLong("삭제하고자 하는 도서의 도서번호를 입력하세요 >> ");
         Book check = Check(id);
         if(check != null) {
             bookList.remove(check);
@@ -238,20 +238,18 @@ public class BM3 extends BookManager{
     }
     public static int getInt(String prompt) {
         try {
-            System.out.println(prompt);
-            System.out.print(">> ");
+            System.out.print(prompt);
             String input = sc.nextLine();
             int value = Integer.parseInt(input);
             return value;
         } catch (Exception e) {
-            System.out.println("잘못된 값을 입력하셨습니다. 숫자로 다시 입력하세요 ㅠㅠ");
+            System.out.println("잘못된 값을 입력하셨습니다. 정수형으로 다시 입력하세요 ㅠㅠ");
             return getInt(prompt);
         }
     }
     public static LocalDate getDate(String prompt){
         try{
-            System.out.println(prompt);
-            System.out.print(">> ");
+            System.out.print(prompt);
             String publishDate = sc.nextLine();
             LocalDate Date = LocalDate.parse(publishDate);
             return Date;
@@ -262,14 +260,13 @@ public class BM3 extends BookManager{
     }
     public static Long getLong(String prompt) {
         try {
-            System.out.println(prompt);
-            System.out.print(">> ");
+            System.out.print(prompt);
             String input = sc.nextLine();
             long value = Long.parseLong(input);
             return value;
         } catch (Exception e) {
-            System.out.println("잘못된 값을 입력하셨습니다. 숫자를 다시 입력하세요 ㅠㅠ");
-            return getLong(prompt); // 재귀 호출
+            System.out.println("잘못된 값을 입력하셨습니다. Long타입 정수로 다시 입력하세요 ㅠㅠ");
+            return getLong(prompt);
         }
     }
     public void printBookInName(){
@@ -312,8 +309,8 @@ public class BM3 extends BookManager{
             System.out.println("해당 도서는 존재하지 않습니다. ");
     }
     public void printBookInTime(){
-        LocalDate bookTime1 = getDate("출간일 시작범위 입력 ");
-        LocalDate bookTime2 = getDate("출간일 종료범위 입력 ");
+        LocalDate bookTime1 = getDate("출간일 시작범위 입력 >> ");
+        LocalDate bookTime2 = getDate("출간일 종료범위 입력 >> ");
         System.out.println("■■■■■■■■ 도서 출간일로 조회 ■■■■■■■■");
         boolean check = true;
         for (Book b : bookList){
