@@ -270,7 +270,7 @@ public class BM3 extends BookManager{
         }
     }
     public void printBookInName(){
-        System.out.println("도서 제목 입력: ");
+        System.out.print("도서 제목 입력 >> ");
         String bookName = (sc.nextLine()).toLowerCase();
         boolean check = true;
         System.out.println("■■■■■■■■ 도서 제목으로 조회 ■■■■■■■■");
@@ -366,10 +366,10 @@ public class BM3 extends BookManager{
         }
     }
     int partition(ArrayList<Book> bookList, int p, int r, boolean check){
+        int i = p - 1;
+        Book temp;
         if (check) {
             String x = bookList.get(r).getName();
-            int i = p - 1;
-            Book temp;
             for (int j = p; j < r; j++) {
                 if (bookList.get(j).getName().compareToIgnoreCase(x) <= 0) {
                     temp = bookList.get(++i);
@@ -377,15 +377,9 @@ public class BM3 extends BookManager{
                     bookList.set(j, temp);
                 }
             }
-            temp = bookList.get(i + 1);
-            bookList.set(i + 1, bookList.get(r));
-            bookList.set(r, temp);
-            return i + 1;
         }
         else {
             LocalDate x = bookList.get(r).getPublishedDate();
-            int i = p - 1;
-            Book temp;
             for (int j = p; j < r; j++) {
                 if (!bookList.get(j).getPublishedDate().isAfter(x)) {
                     temp = bookList.get(++i);
@@ -393,13 +387,12 @@ public class BM3 extends BookManager{
                     bookList.set(j, temp);
                 }
             }
-            temp = bookList.get(i + 1);
-            bookList.set(i + 1, bookList.get(r));
-            bookList.set(r, temp);
-            return i + 1;
         }
+        temp = bookList.get(i + 1);
+        bookList.set(i + 1, bookList.get(r));
+        bookList.set(r, temp);
+        return i + 1;
     }
-
 }
 
 
