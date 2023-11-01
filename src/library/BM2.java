@@ -190,24 +190,19 @@ public class BM2 extends BookManager{
             }
             switch (i) {
                 case 1:
-                    if (check.getId().equals(id)) {
                         check.setName(name);
                         check.setAuthor(author);
                         check.setIsbn(Long.parseLong(isbn));
                         check.setPublishedDate(LocalDate.parse(publishDate));
-                    }
                     break;
                 case 2:
-                    if (check.getId().equals(id)) {
                         check.setName(name);
                         check.setAuthor(author);
                         check.setIsbn(Long.parseLong(isbn));
                         check.setPublishedDate(LocalDate.parse(publishDate));
                         ((EBook) check).setFileSize(fileSize);
-                    }
                     break;
                 case 3:
-                    if (check.getId().equals(id)) {
                         check.setName(name);
                         check.setAuthor(author);
                         check.setIsbn(Long.parseLong(isbn));
@@ -215,7 +210,6 @@ public class BM2 extends BookManager{
                         ((AudioBook) check).setFileSize(fileSize);
                         ((AudioBook) check).setLanguage(language);
                         ((AudioBook) check).setPlayTime(Integer.parseInt(time));
-                    }
                     break;
                 default:
                     break;
