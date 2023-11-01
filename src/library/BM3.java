@@ -24,6 +24,7 @@ public class BM3 extends BookManager{
             System.out.println("(2) 도서 등록");
             System.out.println("(3) 도서 수정");
             System.out.println("(4) 도서 삭제");
+            System.out.println("(5) 도서 이름으로 검색");
             System.out.println("(q) 프로그램 종료");
             System.out.print("선택 >> ");
             String userInput = sc.nextLine();
@@ -48,6 +49,9 @@ public class BM3 extends BookManager{
                     // 메소드를 종료
                     System.out.println("프로그램 종료!");
                     return;
+                case"6":
+                    printBookInName();
+                    break;
                 default:
                     System.out.println("보기에 나와있는 것을 입력하세요!!! :( ");
                     break;
@@ -110,7 +114,7 @@ public class BM3 extends BookManager{
 //            System.out.print("(4) isbn을 입력해주세요. >> ");
 //            String isbn = sc.nextLine();
             long isbn = getLong("(4) isbn을 입력해주세요. ");
-            LocalDate Date = getDate("(5) 출간일을 입력해주세요.(YYYY-MM-DD형식) >> ");
+            LocalDate Date = getDate("(5) 출간일을 입력해주세요.(YYYY-MM-DD형식) ");
             if(form >= 2) {
                 System.out.print("(6) 파일 사이즈를 입력해주세요. >> ");
                 file = sc.nextLine();
@@ -278,4 +282,84 @@ public class BM3 extends BookManager{
         }
     }
 
+    public void printBookInName(){
+        System.out.println("도서 제목 입력: ");
+        String bookName = sc.nextLine();
+        System.out.println("■■■■■■■■ 도서 제목으로 조회 ■■■■■■■■");
+        for (Book b : bookList){
+            if(b.getName().compareTo(bookName) >= 0){
+                System.out.print("[");
+                System.out.print(b.getId());
+                System.out.print(", ");
+                System.out.print(b.getName());
+                System.out.print(", ");
+                System.out.print(b.getAuthor());
+                System.out.print(", ");
+                System.out.print(b.getIsbn());
+                System.out.print(", ");
+                System.out.print(b.getPublishedDate());
+                if(b instanceof EBook) {
+                    System.out.print(", ");
+                    System.out.print(((EBook) b).getFileSize());
+                    System.out.println("]");
+                    return;
+                } else if (b instanceof AudioBook) {
+                    System.out.print(", ");
+                    System.out.print(((AudioBook) b).getFileSize());
+                    System.out.print(", ");
+                    System.out.print(((AudioBook) b).getLanguage());
+                    System.out.print(", ");
+                    System.out.print(((AudioBook) b).getPlayTime());
+                    System.out.println("]");
+                    return;
+                } else {
+                    System.out.println("]");
+                    return;
+                }
+            }
+        }
+        System.out.println("해당 도서는 존재하지 않습니다.");
+    }
+
+    public void printBookInTime(){
+        LocalDate bookTime1 = getDate("출간일 시작범위 입력 ");
+        LocalDate bookTime2 = getDate("출간일 종료범위 입력 ");
+        System.out.println("■■■■■■■■ 도서 출간일로 조회 ■■■■■■■■");
+        for (Book b : bookList){
+            if(b.getPublishedDate().compareTo(bookTime1) >= 0){
+                System.out.print("[");
+                System.out.print(b.getId());
+                System.out.print(", ");
+                System.out.print(b.getName());
+                System.out.print(", ");
+                System.out.print(b.getAuthor());
+                System.out.print(", ");
+                System.out.print(b.getIsbn());
+                System.out.print(", ");
+                System.out.print(b.getPublishedDate());
+                if(b instanceof EBook) {
+                    System.out.print(", ");
+                    System.out.print(((EBook) b).getFileSize());
+                    System.out.println("]");
+                    return;
+                } else if (b instanceof AudioBook) {
+                    System.out.print(", ");
+                    System.out.print(((AudioBook) b).getFileSize());
+                    System.out.print(", ");
+                    System.out.print(((AudioBook) b).getLanguage());
+                    System.out.print(", ");
+                    System.out.print(((AudioBook) b).getPlayTime());
+                    System.out.println("]");
+                    return;
+                } else {
+                    System.out.println("]");
+                    return;
+                }
+            }
+        }
+        System.out.println("해당 도서는 존재하지 않습니다.");
+        }
+
 }
+
+
