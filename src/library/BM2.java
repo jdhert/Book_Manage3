@@ -234,7 +234,7 @@ public class BM2 extends BookManager{
             System.out.println("삭제가 완료되었습니다.");
         } else System.out.println("해당 도서가 존재하지 않습니다.");
     }
-    public Book Check(long id){
+    public Book Check(long id) {
         for (Book b : bookList){
             if(b.getId().equals(id)){
                 if(b instanceof  EBook)
