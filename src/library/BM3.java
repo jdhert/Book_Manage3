@@ -68,7 +68,6 @@ public class BM3 extends BookManager{
                     System.out.println("보기에 나와있는 것을 입력하세요!!! :( ");
                     break;
             }
-
         }
     }
     @Override
@@ -165,9 +164,9 @@ public class BM3 extends BookManager{
     public void updateBook() {
         System.out.println("수정 메서드 실행");
         long id = getLong("수정하고자 하는 도서번호를 입력하세요 ");
-        Book check = Check(id);
+        Book form = Check(id);
         int i=0;
-        if (check != null) {
+        if (form != null) {
             String fileSize = "";
             String language = "";
             int time=0;
@@ -179,11 +178,11 @@ public class BM3 extends BookManager{
             long isbn = getLong("isbn: ");
             LocalDate Date = getDate("출판일(YYYY-MM-DD): ");
             i++;
-            if (check instanceof EBook) {
+            if (form instanceof EBook) {
                 System.out.print("파일사이즈: ");
                 fileSize = sc.nextLine();
                 i=2;
-            }else if (check instanceof AudioBook) {
+            }else if (form instanceof AudioBook) {
                 System.out.print("파일사이즈: ");
                 fileSize = sc.nextLine();
                 System.out.print("언어: ");
@@ -193,26 +192,26 @@ public class BM3 extends BookManager{
             }
             switch (i) {
                 case 1:
-                    check.setName(name);
-                    check.setAuthor(author);
-                    check.setIsbn(isbn);
-                    check.setPublishedDate(Date);
+                    form.setName(name);
+                    form.setAuthor(author);
+                    form.setIsbn(isbn);
+                    form.setPublishedDate(Date);
                     break;
                 case 2:
-                    check.setName(name);
-                    check.setAuthor(author);
-                    check.setIsbn(isbn);
-                    check.setPublishedDate(Date);
-                    ((EBook) check).setFileSize(fileSize);
+                    form.setName(name);
+                    form.setAuthor(author);
+                    form.setIsbn(isbn);
+                    form.setPublishedDate(Date);
+                    ((EBook) form).setFileSize(fileSize);
                     break;
                 case 3:
-                    check.setName(name);
-                    check.setAuthor(author);
-                    check.setIsbn(isbn);
-                    check.setPublishedDate(Date);
-                    ((AudioBook) check).setFileSize(fileSize);
-                    ((AudioBook) check).setLanguage(language);
-                    ((AudioBook) check).setPlayTime(time);
+                    form.setName(name);
+                    form.setAuthor(author);
+                    form.setIsbn(isbn);
+                    form.setPublishedDate(Date);
+                    ((AudioBook) form).setFileSize(fileSize);
+                    ((AudioBook) form).setLanguage(language);
+                    ((AudioBook) form).setPlayTime(time);
                     break;
                 default:
                     break;
@@ -426,7 +425,6 @@ public class BM3 extends BookManager{
             int i = p - 1;
             Book temp;
             for (int j = p; j < r; j++) {
-//            System.out.println(bookList.get(j).getName().compareTo(x));
                 if (bookList.get(j).getName().compareToIgnoreCase(x) <= 0) {
                     temp = bookList.get(++i);
                     bookList.set(i, bookList.get(j));
@@ -443,7 +441,6 @@ public class BM3 extends BookManager{
             int i = p - 1;
             Book temp;
             for (int j = p; j < r; j++) {
-//            System.out.println(bookList.get(j).getName().compareTo(x));
                 if (!bookList.get(j).getPublishedDate().isAfter(x)) {
                     temp = bookList.get(++i);
                     bookList.set(i, bookList.get(j));
