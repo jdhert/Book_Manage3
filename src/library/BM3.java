@@ -381,7 +381,6 @@ public class BM3 extends BookManager{
             System.out.println();
         }
     }
-
     public void dateByPrint(){
         System.out.println("■■■■■■■■ 도서 출판일 순으로 정렬 ■■■■■■■■");
         quickSort(bookList, 0, bookList.size()-1, false);
