@@ -2,6 +2,8 @@ package library;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class BM3 extends BookManager{
@@ -350,49 +352,66 @@ public class BM3 extends BookManager{
     }
     public void dictionaryPrint(){
         System.out.println("■■■■■■■■ 도서 사전순으로 정렬 ■■■■■■■■");
-        quickSort(bookList, 0, bookList.size()-1, true);
+        Collections.sort(bookList,new bookNameComparator());
+//        quickSort(bookList, 0, bookList.size()-1, true);
         printAllBook();
     }
     public void dateByPrint(){
         System.out.println("■■■■■■■■ 도서 출판일 순으로 정렬 ■■■■■■■■");
-        quickSort(bookList, 0, bookList.size()-1, false);
+        Collections.sort(bookList, new bookDateComparator());
+//        quickSort(bookList, 0, bookList.size()-1, false);
         printAllBook();
     }
-    void quickSort(ArrayList<Book> bookList, int p, int r, boolean check){
-        if(p < r){
-            int q = partition(bookList,p,r, check);
-            quickSort(bookList, p, q-1, check);
-            quickSort(bookList, q+1, r, check);
+//    void quickSort(ArrayList<Book> bookList, int p, int r, boolean check){
+//        if(p < r){
+//            int q = partition(bookList,p,r, check);
+//            quickSort(bookList, p, q-1, check);
+//            quickSort(bookList, q+1, r, check);
+//        }
+//    }
+//    int partition(ArrayList<Book> bookList, int p, int r, boolean check){
+//        int i = p - 1;
+//        Book temp;
+//        if (check) {
+//            String x = bookList.get(r).getName();
+//            for (int j = p; j < r; j++) {
+//                if (bookList.get(j).getName().compareToIgnoreCase(x) <= 0) {
+//                    temp = bookList.get(++i);
+//                    bookList.set(i, bookList.get(j));
+//                    bookList.set(j, temp);
+//                }
+//            }
+//        }
+//        else {
+//            LocalDate x = bookList.get(r).getPublishedDate();
+//            for (int j = p; j < r; j++) {
+//                if (!bookList.get(j).getPublishedDate().isAfter(x)) {
+//                    temp = bookList.get(++i);
+//                    bookList.set(i, bookList.get(j));
+//                    bookList.set(j, temp);
+//                }
+//            }
+//        }
+//        temp = bookList.get(i + 1);
+//        bookList.set(i + 1, bookList.get(r));
+//        bookList.set(r, temp);
+//        return i + 1;
+//    }
+
+    class bookNameComparator implements Comparator<Book>{
+        @Override
+        public int compare(Book o1, Book o2) {
+            return o1.getName().compareTo(o2.getName());
         }
     }
-    int partition(ArrayList<Book> bookList, int p, int r, boolean check){
-        int i = p - 1;
-        Book temp;
-        if (check) {
-            String x = bookList.get(r).getName();
-            for (int j = p; j < r; j++) {
-                if (bookList.get(j).getName().compareToIgnoreCase(x) <= 0) {
-                    temp = bookList.get(++i);
-                    bookList.set(i, bookList.get(j));
-                    bookList.set(j, temp);
-                }
-            }
+
+    class bookDateComparator implements  Comparator<Book>{
+        @Override
+        public int compare(Book o1, Book o2) {
+            return o1.getPublishedDate().compareTo(o2.getPublishedDate());
         }
-        else {
-            LocalDate x = bookList.get(r).getPublishedDate();
-            for (int j = p; j < r; j++) {
-                if (!bookList.get(j).getPublishedDate().isAfter(x)) {
-                    temp = bookList.get(++i);
-                    bookList.set(i, bookList.get(j));
-                    bookList.set(j, temp);
-                }
-            }
-        }
-        temp = bookList.get(i + 1);
-        bookList.set(i + 1, bookList.get(r));
-        bookList.set(r, temp);
-        return i + 1;
     }
+
 }
 
 
