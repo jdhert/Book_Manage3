@@ -397,21 +397,18 @@ public class BM3 extends BookManager{
 //        bookList.set(r, temp);
 //        return i + 1;
 //    }
-
     class bookNameComparator implements Comparator<Book>{
         @Override
         public int compare(Book o1, Book o2) {
             return o1.getName().compareTo(o2.getName());
         }
     }
-
     class bookDateComparator implements  Comparator<Book>{
         @Override
         public int compare(Book o1, Book o2) {
             return o1.getPublishedDate().compareTo(o2.getPublishedDate());
         }
     }
-
 }
 
 

@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abb05e2e-b168-4c1a-a84b-c2d59533da44" name="Changes" comment="Final version">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="abb05e2e-b168-4c1a-a84b-c2d59533da44" name="Changes" comment="Improved version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/library/BM3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/BM3.java" afterDir="false" />
     </list>
@@ -61,7 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698799125053</updated>
       <workItem from="1698799126130" duration="14473000" />
-      <workItem from="1698883325000" duration="3685000" />
+      <workItem from="1698883325000" duration="6806000" />
     </task>
     <task id="LOCAL-00001" summary="final">
       <option name="closed" value="true" />
@@ -167,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698846560439</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Improved version">
+      <option name="closed" value="true" />
+      <created>1698887191401</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1698887191401</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +195,7 @@
     <MESSAGE value="변수명 변화" />
     <MESSAGE value="변수명 변화!" />
     <MESSAGE value="Final version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Final version" />
+    <MESSAGE value="Improved version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved version" />
   </component>
 </project>
